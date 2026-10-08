@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sense, Think, Transmit — TinyML and LoRaWAN Workshop</title>
+<meta name="description" content="Four-day hands-on workshop on TinyML and LoRaWAN at Imperial College London, 12–15 October 2026: agenda and slides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #17283A;
+    --blue: #0072BC;
+    --track: #C9D3DD;
+    --bg: #FAFAFA;
+    --text: #17283A;
+    --muted: #6B7785;
+    --card: #FFFFFF;
+    --line: #E3E8EE;
+    --tag: #E6EEF6;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Fira Sans", Calibri, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  a { color: var(--blue); }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header: a Metropolis title frame */
+  header { background: var(--navy); color: #fff; }
+  header .wrap { padding-top: 56px; padding-bottom: 44px; }
+  .kicker { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: #9CC9EE; margin: 0 0 14px; }
+  h1 { font-weight: 500; font-size: clamp(30px, 5vw, 44px); line-height: 1.15; margin: 0 0 14px; }
+  .sub { font-weight: 300; font-size: clamp(18px, 2.6vw, 22px); margin: 0 0 28px; color: #E3EAF1; }
+  .facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 0; padding: 0; list-style: none; font-size: 16px; color: #E3EAF1; }
+  .facts b { font-weight: 500; color: #fff; }
+  .progress { height: 4px; background: #3A4C60; }
+  .progress span { display: block; height: 100%; width: 25%; background: var(--blue); }
+
+  nav.days { position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--line); }
+  nav.days .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; }
+  nav.days a { flex: 0 0 auto; text-decoration: none; color: var(--text); font-size: 15px; padding: 6px 12px; border-radius: 6px; }
+  nav.days a:hover, nav.days a:focus-visible { background: var(--tag); outline: none; }
+
+  main { padding: 36px 0 24px; }
+  .intro { color: var(--muted); max-width: 680px; margin: 0 0 36px; }
+
+  section.day { margin: 0 0 44px; scroll-margin-top: 64px; }
+  .day-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 4px; }
+  .day-num { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); font-weight: 600; }
+  .day-date { font-size: 14px; color: var(--muted); }
+  h2 { font-weight: 500; font-size: 26px; margin: 0 0 16px; line-height: 1.25; }
+  .rule { height: 3px; background: var(--track); margin-bottom: 18px; }
+  .rule span { display: block; height: 100%; background: var(--blue); }
+
+  ol.sessions { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .session { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; gap: 14px; justify-content: space-between; align-items: flex-start; }
+  .session .what { min-width: 0; }
+  .type { display: inline-block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; color: var(--muted); margin-bottom: 2px; }
+  .type.lab { color: #B4581A; }
+  .type.build { color: #2E7D4F; }
+  .title { font-weight: 500; font-size: 18px; margin: 0; }
+  .title small { display: block; font-weight: 400; font-size: 16px; color: var(--muted); margin-top: 2px; }
+  .links { display: flex; flex-direction: column; gap: 6px; flex: 0 0 auto; align-items: flex-end; }
+  a.pdf { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 15px; font-weight: 500; color: var(--blue); background: var(--tag); padding: 6px 12px; border-radius: 6px; white-space: nowrap; }
+  a.pdf:hover, a.pdf:focus-visible { background: var(--blue); color: #fff; outline: none; }
+  a.pdf .meta { font-weight: 400; font-size: 13px; opacity: .8; }
+  .noslides { font-size: 14px; color: var(--muted); white-space: nowrap; padding-top: 6px; }
+
+  section.all { border-top: 1px solid var(--line); padding-top: 32px; }
+  table { width: 100%; border-collapse: collapse; font-size: 16px; }
+  th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 500; color: var(--muted); font-size: 14px; }
+  td.num { white-space: nowrap; color: var(--muted); }
+
+  footer { color: var(--muted); font-size: 14px; padding: 28px 0 48px; }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    header .wrap { padding-top: 40px; padding-bottom: 32px; }
+    .session { flex-direction: column; }
+    .links { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+    .hide-sm { display: none; }
+  }
+  @media print {
+    nav.days { display: none; }
+    header { background: none; color: var(--text); }
+    .kicker, .sub, .facts, .facts b { color: var(--text); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Hands-on workshop · Imperial College London</p>
+    <h1>Sense, Think, Transmit</h1>
+    <p class="sub">TinyML and LoRaWAN for Real-World Deployments</p>
+    <ul class="facts">
+      <li><b>When</b> 12–15 October 2026</li>
+      <li><b>Where</b> Imperial College London</li>
+      <li><b>Instructor</b> Marco Zennaro, ICTP</li>
+    </ul>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+
+<nav class="days" aria-label="Days">
+  <div class="wrap">
+    <a href="#day1">Day 1 · Sense</a>
+    <a href="#day2">Day 2 · Transmit</a>
+    <a href="#day3">Day 3 · Listen and Build</a>
+    <a href="#day4">Day 4 · The New Frontier</a>
+    <a href="#slides">All slides</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <p class="intro">Four days from sensing to sending: running vision and audio models on microcontrollers, getting their results across kilometres with LoRaWAN, and finishing with LLMs on the Arduino UNO Q. Slides are linked next to each session as PDFs.</p>
+
+    <section class="day" id="day1">
+      <div class="day-head"><span class="day-num">Day 1</span><span class="day-date">Monday 12 October</span></div>
+      <h2>Sense: Machines That See</h2>
+      <div class="rule" aria-hidden="true"><span style="width:25%"></span></div>
+      <ol class="sessions">
+        <li class="session">
+          <div class="what"><span class="type">Lecture</span><p class="title">Intelligence at the Edge: Why TinyML, and Why Now</p></div>
+          <div class="links"><a class="pdf" href="slides/01-intro-tinyml.pdf">Slides <span class="meta">PDF · 6.5 MB</span></a></div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type">Lecture</span><p class="title">Vision Models on Microcontrollers</p></div>
+          <div class="links">
+            <a class="pdf" href="slides/02-computer-vision.pdf">Computer vision <span class="meta">PDF · 6.0 MB</span></a>
+            <a class="pdf" href="slides/03-object-detection.pdf">Object detection <span class="meta">PDF · 1.8 MB</span></a>
+          </div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type lab">Lab</span><p class="title">Nicla Setup Clinic: getting everyone to a blinking LED<small>First Light: Your Nicla Opens Its Eyes</small></p></div>
+          <div class="links"><a class="pdf" href="slides/04-nicla-vision-lab.pdf">Lab slides <span class="meta">PDF · 3.9 MB</span></a></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="day" id="day2">
+      <div class="day-head"><span class="day-num">Day 2</span><span class="day-date">Tuesday 13 October</span></div>
+      <h2>Transmit: Ten Kilometres on a Coin Cell</h2>
+      <div class="rule" aria-hidden="true"><span style="width:50%"></span></div>
+      <ol class="sessions">
+        <li class="session">
+          <div class="what"><span class="type">Lecture</span><p class="title">The LoRaWAN Story: Long Range, Low Power, Tiny Payloads</p></div>
+          <div class="links"><a class="pdf" href="slides/05-lorawan-lpwan.pdf">Slides <span class="meta">PDF · 5.9 MB</span></a></div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type">Lecture</span><p class="title">From Device to Dashboard: Introduction to MQTT</p></div>
+          <div class="links"><a class="pdf" href="slides/06-mqtt.pdf">Slides <span class="meta">PDF · 2.6 MB</span></a></div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type lab">Lab</span><p class="title">Seeing Your Data: TTN to MQTT to Smartphone</p></div>
+          <div class="links"><a class="pdf" href="slides/07-ttn-hacks.pdf">TTN troubleshooting <span class="meta">PDF · 0.1 MB</span></a></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="day" id="day3">
+      <div class="day-head"><span class="day-num">Day 3</span><span class="day-date">Wednesday 14 October</span></div>
+      <h2>Listen and Build</h2>
+      <div class="rule" aria-hidden="true"><span style="width:75%"></span></div>
+      <ol class="sessions">
+        <li class="session">
+          <div class="what"><span class="type">Lecture</span><p class="title">Keyword Spotting and Audio Scene Classification</p></div>
+          <div class="links"><a class="pdf" href="slides/08-audio-kws-lab.pdf">Slides <span class="meta">PDF · 7.2 MB</span></a></div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type lab">Lab</span><p class="title">“Hey Nicla”: Building Your Own Wake Word</p></div>
+          <div class="links"><a class="pdf" href="slides/09-connecting-devices.pdf">Connecting your device <span class="meta">PDF · 1.4 MB</span></a></div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type build">Project</span><p class="title">Project Kickoff: Pitch, Team Up, Scope Down</p></div>
+          <div class="noslides">No slides</div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type build">Project</span><p class="title">Build Session I</p></div>
+          <div class="noslides">No slides</div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="day" id="day4">
+      <div class="day-head"><span class="day-num">Day 4</span><span class="day-date">Thursday 15 October</span></div>
+      <h2>The New Frontier</h2>
+      <div class="rule" aria-hidden="true"><span style="width:100%"></span></div>
+      <ol class="sessions">
+        <li class="session">
+          <div class="what"><span class="type">Lecture + lab</span><p class="title">When the Edge Learns to Talk: LLMs on the Arduino UNO Q</p></div>
+          <div class="links"><a class="pdf" href="slides/10-llm-uno-q-lab.pdf">Student lab <span class="meta">PDF · 0.2 MB</span></a></div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type build">Project</span><p class="title">Build Session II</p></div>
+          <div class="noslides">No slides</div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type build">Project</span><p class="title">Demo Session: Show What You Made</p></div>
+          <div class="noslides">No slides</div>
+        </li>
+        <li class="session">
+          <div class="what"><span class="type">Roundtable</span><p class="title">What Comes After TinyML? Open Problems and Open Collaboration</p></div>
+          <div class="noslides">No slides</div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="all" id="slides">
+      <h2>All slides</h2>
+      <table>
+        <thead><tr><th>Deck</th><th class="hide-sm">Day</th><th>Pages</th></tr></thead>
+        <tbody>
+          <tr><td><a href="slides/00-syllabus.pdf">About the syllabus</a></td><td class="num hide-sm">Opening</td><td class="num">18</td></tr>
+          <tr><td><a href="slides/01-intro-tinyml.pdf">TinyML: Machine Learning meets the Internet of Things</a></td><td class="num hide-sm">1</td><td class="num">61</td></tr>
+          <tr><td><a href="slides/02-computer-vision.pdf">Convolutions for Hands-on Computer Vision</a></td><td class="num hide-sm">1</td><td class="num">84</td></tr>
+          <tr><td><a href="slides/03-object-detection.pdf">Object detection (FOMO)</a></td><td class="num hide-sm">1</td><td class="num">15</td></tr>
+          <tr><td><a href="slides/04-nicla-vision-lab.pdf">Lab: getting to know the Nicla Vision</a></td><td class="num hide-sm">1</td><td class="num">36</td></tr>
+          <tr><td><a href="slides/05-lorawan-lpwan.pdf">Introduction to LoRaWAN and LPWAN</a></td><td class="num hide-sm">2</td><td class="num">56</td></tr>
+          <tr><td><a href="slides/06-mqtt.pdf">MQTT</a></td><td class="num hide-sm">2</td><td class="num">42</td></tr>
+          <tr><td><a href="slides/07-ttn-hacks.pdf">TTN hacks</a></td><td class="num hide-sm">2</td><td class="num">8</td></tr>
+          <tr><td><a href="slides/08-audio-kws-lab.pdf">TinyML and Audio – Lab #1</a></td><td class="num hide-sm">3</td><td class="num">104</td></tr>
+          <tr><td><a href="slides/09-connecting-devices.pdf">Connect device for data capture</a></td><td class="num hide-sm">3</td><td class="num">10</td></tr>
+          <tr><td><a href="slides/10-llm-uno-q-lab.pdf">Chat with an AI that lives on an Arduino</a></td><td class="num hide-sm">4</td><td class="num">9</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    Organised by the Science, Technology and Innovation Unit, ICTP — The Abdus Salam International Centre for Theoretical Physics, Trieste. Contact: <a href="mailto:mzennaro@ictp.it">mzennaro@ictp.it</a>
+  </div>
+</footer>
+
+</body>
+</html>
